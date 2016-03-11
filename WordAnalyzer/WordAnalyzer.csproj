@@ -46,6 +46,7 @@
     <Compile Include="Analyzer.cs" />
     <Compile Include="AnalyzerApp.cs" />
     <Compile Include="IWordSource.cs" />
+    <Compile Include="MostCommonlyUsedWordFinder.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="WordSource1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
