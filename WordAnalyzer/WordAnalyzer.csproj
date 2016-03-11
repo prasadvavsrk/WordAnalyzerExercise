@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalysisResults.cs" />
     <Compile Include="Analyzer.cs" />
     <Compile Include="AnalyzerApp.cs" />
     <Compile Include="IWordSource.cs" />
