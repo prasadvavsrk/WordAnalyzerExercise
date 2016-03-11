@@ -48,3 +48,5 @@ You will need to use Linq functions to achieve this! You can either start from s
 there's a special prize for anyone who doesn't use the : ? or the ?? operators.
 
 Once you've done this, push your changes to your account. 
+
+5. Check out the other branches and compare them to your solutions.
