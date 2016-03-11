@@ -4,6 +4,8 @@ namespace WordAnalyzer
 {
     public class AnalyzerApp
     {
+        private Analyzer m_Analyzer;
+
         public static void Main(string[] args)
         {
             new AnalyzerApp().Run();
@@ -11,9 +13,17 @@ namespace WordAnalyzer
 
         private void Run()
         {
-            var analyzer = new Analyzer();
-            var results = analyzer.Analyze(new WordSource1().Read());
-            Console.WriteLine("WordSource1: {0}", results);
+            m_Analyzer = new Analyzer();
+
+            RunWith(new WordSource1());
+            RunWith(new WordSource2());
+            RunWith(new WordSource3());
+        }
+
+        private void RunWith(IWordSource wordSource)
+        {
+            var results = m_Analyzer.Analyze(wordSource.Read());
+            Console.WriteLine("{0}: {1}", wordSource, results);
         }
     }
 }
