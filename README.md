@@ -44,8 +44,7 @@ Keep checking the code into your local repository as you go.
 3. Now make a new branch called NoLoops. In this branch, you're going to develop a new solution that has no loops (no foreach, no for, and no while statements), and no recursive functions.
 You will need to use Linq functions to achieve this! You can either start from scratch or you can refactor your current solution until there are no loops in it.
 
-4. Now make a new another branch call NoIfs. Yes, you've guessed: no if statements, no case statements, and 
-there's a special prize for anyone who doesn't use the : ? or the ?? operators.
+4. Now make a new another branch call NoIfs. Yes, you've guessed: no if statements, no case statements.
 
 Once you've done this, push your changes to your account. 
 
