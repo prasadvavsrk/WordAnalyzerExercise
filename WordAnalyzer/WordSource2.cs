@@ -4,16 +4,17 @@ namespace WordAnalyzer
 {
     public class WordSource2 : IWordSource
     {
-        private readonly IEnumerable<string> m_Text;
+        private readonly IEnumerator<string> m_TextEnumerator;
 
         public WordSource2()
         {
-            m_Text = new WordSource1().Read();
+            m_TextEnumerator = new WordSource1().Read().GetEnumerator();
         }
 
         public IEnumerable<string> Read()
         {
-            return m_Text;
+            while (m_TextEnumerator.MoveNext())
+                yield return m_TextEnumerator.Current;
         }
     }
 }
