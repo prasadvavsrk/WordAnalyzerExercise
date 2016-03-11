@@ -12,14 +12,14 @@ namespace WordAnalyzer
         public AnalysisResults Analyze(IEnumerable<string> input)
         {
             var words = input.ToList();
-            if (words.Count == 0) return new AnalysisResults();
-
-            var results = new AnalysisResults
-            {
-                LongestWordLength = words.Select(word => word.Length).Max(),
-                MostCommonlyUsedWords = MostCommonlyUsedWordsIn(words),
-                WordCount = words.Count
-            };
+            var results = words.Count == 0
+                ? new AnalysisResults()
+                : new AnalysisResults
+                {
+                    LongestWordLength = words.Select(word => word.Length).Max(),
+                    MostCommonlyUsedWords = MostCommonlyUsedWordsIn(words),
+                    WordCount = words.Count
+                };
             return results;
         }
 
