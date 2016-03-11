@@ -24,13 +24,11 @@ namespace WordAnalyzer
 
         private IEnumerable<string> FindWordsWithFrequencyEqualTo(int highestFrequency)
         {
-            var mostCommonlyUsedWords = new List<string>();
             foreach (var frequency in m_Frequencies)
             {
                 if (frequency.Value == highestFrequency)
-                    mostCommonlyUsedWords.Add(frequency.Key);
+                    yield return frequency.Key;
             }
-            return mostCommonlyUsedWords;
         }
 
         private int FindHighestFrequency()
