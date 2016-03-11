@@ -30,6 +30,12 @@ namespace WordAnalyzer
             /// If two or more words share the most commonly used slot, they are all returned.
             /// </summary>
             public IEnumerable<string> MostCommonlyUsedWords { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("WordCount: {0}, LongestWordLength: {1}, MostCommonlyUsedWords: {2}",
+                    WordCount, LongestWordLength, string.Join(", ", MostCommonlyUsedWords ?? new string[0]));
+            }
         }
     }
 }

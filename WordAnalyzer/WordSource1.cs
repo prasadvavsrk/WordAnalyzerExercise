@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace WordAnalyzer
 {
-    public class WordSource
+    public class WordSource1
     {
         public IEnumerable<string> Read()
         {
