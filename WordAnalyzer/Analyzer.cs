@@ -12,11 +12,9 @@ namespace WordAnalyzer
         public AnalysisResults Analyze(IEnumerable<string> input)
         {
             var words = input.ToList();
-            var results = words.Count == 0
-                ? new AnalysisResults()
-                : new AnalysisResults
+            var results = new AnalysisResults
                 {
-                    LongestWordLength = words.Select(word => word.Length).Max(),
+                    LongestWordLength = words.Select(word => word.Length).DefaultIfEmpty().Max(),
                     MostCommonlyUsedWords = MostCommonlyUsedWordsIn(words),
                     WordCount = words.Count
                 };
@@ -28,7 +26,7 @@ namespace WordAnalyzer
             var x = words.GroupBy(word => word)
                     .Select(wordWithCounts => new {word = wordWithCounts.Key, count = wordWithCounts.Count()})
                     .ToList();
-            var maxWordFrequency = x.Max(xx => xx.count);
+            var maxWordFrequency = x.Select(xx => xx.count).DefaultIfEmpty().Max();
             var mostCommonlyUsedWords = x.Where(xx => xx.count == maxWordFrequency).Select(xx => xx.word);
             return mostCommonlyUsedWords;
         }
