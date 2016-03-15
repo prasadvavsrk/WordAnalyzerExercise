@@ -25,11 +25,11 @@ namespace WordAnalyzer
 
         private static IEnumerable<string> MostCommonlyUsedWordsIn(IEnumerable<string> words)
         {
-            var x = words.GroupBy(word => word)
+            var wordsWithCount = words.GroupBy(word => word)
                     .Select(wordWithCounts => new {word = wordWithCounts.Key, count = wordWithCounts.Count()})
                     .ToList();
-            var maxWordFrequency = x.Max(xx => xx.count);
-            var mostCommonlyUsedWords = x.Where(xx => xx.count == maxWordFrequency).Select(xx => xx.word);
+            var maxWordFrequency = wordsWithCount.Max(wordWithCount => wordWithCount.count);
+            var mostCommonlyUsedWords = wordsWithCount.Where(wordWithCount => wordWithCount.count == maxWordFrequency).Select(xx => xx.word);
             return mostCommonlyUsedWords;
         }
     }
