@@ -29,7 +29,6 @@ namespace WordAnalyzer
                     .Select(wordWithCounts => new {word = wordWithCounts.Key, count = wordWithCounts.Count()})
                     .ToList();
             var maxWordFrequency = wordsWithCount.Max(wordWithCount => wordWithCount.count);
-
             var mostCommonlyUsedWords = wordsWithCount.Where(wordWithCount => wordWithCount.count == maxWordFrequency)
                 .Select(wordWithCount => wordWithCount.word);
             return mostCommonlyUsedWords;
