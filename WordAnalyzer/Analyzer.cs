@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace WordAnalyzer
@@ -14,7 +15,7 @@ namespace WordAnalyzer
             var words = input.ToList();
             var results = new AnalysisResults
                 {
-                    LongestWordLength = words.Select(word => word.Length).DefaultIfEmpty().Max(),
+                    LongestWordLength = MaxOrZeroIfEmpty(words, word => word.Length),
                     MostCommonlyUsedWords = MostCommonlyUsedWordsIn(words),
                     WordCount = words.Count
                 };
@@ -26,9 +27,14 @@ namespace WordAnalyzer
             var wordsWithCounts = words.GroupBy(word => word)
                     .Select(wordWithCounts => new {word = wordWithCounts.Key, count = wordWithCounts.Count()})
                     .ToList();
-            var maxWordFrequency = wordsWithCounts.Select(wordWithCount => wordWithCount.count).DefaultIfEmpty().Max();
+            var maxWordFrequency = MaxOrZeroIfEmpty(wordsWithCounts, wordWithCount => wordWithCount.count);
             var mostCommonlyUsedWords = wordsWithCounts.Where(wordWithCount => wordWithCount.count == maxWordFrequency).Select(wordWithCount => wordWithCount.word);
             return mostCommonlyUsedWords;
+        }
+
+        private static int MaxOrZeroIfEmpty<T>(IEnumerable<T> input, Func<T, int> selector)
+        {
+            return input.Select(selector).DefaultIfEmpty().Max();
         }
     }
 }
