@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WordAnalyzer
 {
@@ -8,9 +9,46 @@ namespace WordAnalyzer
         /// Requests the Analyzer to analyze the input
         /// </summary>
         /// <param name="input"></param>
+
         public AnalysisResults Analyze(IEnumerable<string> input)
         {
-            return new AnalysisResults();
+            int wordCount = 0;
+            int longestWordLength = 0;
+            Dictionary<string, int> wordDictionary = new Dictionary<string, int>();
+
+            foreach ( var word in input)
+            {
+                ++wordCount;
+                longestWordLength = word.Length > longestWordLength ? word.Length : longestWordLength;
+                if ( wordDictionary.ContainsKey(word) )
+                {
+                    ++wordDictionary[word];
+                }
+                else
+                {
+                    wordDictionary.Add(word, 1);
+                }
+            }
+
+            var wordList = wordDictionary.ToList();
+            wordList.Sort((entry1, entry2) => entry2.Value.CompareTo(entry1.Value));
+            int maxRepeatCount = wordList.Count > 0 ? wordList.ElementAt(0).Value : 0;
+            List<string> mostCommonWordsList = new List<string>();
+            foreach (var wordCountPair in wordList)
+            {
+                if (wordCountPair.Value.Equals(maxRepeatCount))
+                {
+                    mostCommonWordsList.Add(wordCountPair.Key);
+                }
+                else
+                    break;
+            }
+
+            var result = new AnalysisResults();
+            result.WordCount = wordCount;
+            result.LongestWordLength = longestWordLength;
+            result.MostCommonlyUsedWords = mostCommonWordsList;
+            return result;
         }
     }
 }
