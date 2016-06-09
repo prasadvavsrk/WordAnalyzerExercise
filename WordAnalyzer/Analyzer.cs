@@ -39,19 +39,15 @@ namespace WordAnalyzer
 
         private IList<string> GetMostCommonWords(IDictionary<string, int> wordDictionary)
         {
-            var wordList = wordDictionary.ToList();
-            wordList.Sort((entry1, entry2) => entry2.Value.CompareTo(entry1.Value));
-            int maxRepeatCount = wordList.Count > 0 ? wordList.ElementAt(0).Value : 0;
+            int maxRepeatCount = wordDictionary.Count > 0 ? wordDictionary.Values.Max() : 0;
 
             List<string> mostCommonWordsList = new List<string>();
-            foreach (var wordCountPair in wordList)
+            foreach (var wordCountPair in wordDictionary)
             {
                 if (wordCountPair.Value.Equals(maxRepeatCount))
                 {
                     mostCommonWordsList.Add(wordCountPair.Key);
                 }
-                else
-                    break;
             }
             return mostCommonWordsList;
         }
