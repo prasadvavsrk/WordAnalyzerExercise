@@ -30,9 +30,19 @@ namespace WordAnalyzer
                 }
             }
 
+            var result = new AnalysisResults();
+            result.WordCount = wordCount;
+            result.LongestWordLength = longestWordLength;
+            result.MostCommonlyUsedWords = GetMostCommonWords(wordDictionary);
+            return result;
+        }
+
+        private IList<string> GetMostCommonWords(IDictionary<string, int> wordDictionary)
+        {
             var wordList = wordDictionary.ToList();
             wordList.Sort((entry1, entry2) => entry2.Value.CompareTo(entry1.Value));
             int maxRepeatCount = wordList.Count > 0 ? wordList.ElementAt(0).Value : 0;
+
             List<string> mostCommonWordsList = new List<string>();
             foreach (var wordCountPair in wordList)
             {
@@ -43,12 +53,7 @@ namespace WordAnalyzer
                 else
                     break;
             }
-
-            var result = new AnalysisResults();
-            result.WordCount = wordCount;
-            result.LongestWordLength = longestWordLength;
-            result.MostCommonlyUsedWords = mostCommonWordsList;
-            return result;
+            return mostCommonWordsList;
         }
     }
 }
