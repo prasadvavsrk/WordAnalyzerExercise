@@ -15,10 +15,9 @@ namespace WordAnalyzer
             var wordCountDictionary = input.GroupBy(word => word).ToDictionary(x => x.Key, x => x.Count());
 
             var result = new AnalysisResults();
-            result.WordCount = input.Count();
-            bool wordListNotEmpty = input.Any();
-            result.LongestWordLength = wordListNotEmpty ? wordCountDictionary.Keys.Select(word => word.Length).Max() : 0;
-            int maxRepeatCount = wordListNotEmpty ? wordCountDictionary.Values.Max() : 0;
+            result.WordCount = wordCountDictionary.Values.DefaultIfEmpty(0).Sum();
+            result.LongestWordLength = wordCountDictionary.Keys.Select(word => word.Length).DefaultIfEmpty(0).Max();
+            int maxRepeatCount = wordCountDictionary.Values.DefaultIfEmpty(0).Max();
             result.MostCommonlyUsedWords = wordCountDictionary.Where(group => group.Value.Equals(maxRepeatCount)).Select(group => group.Key);
 
             return result;
