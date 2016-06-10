@@ -17,10 +17,15 @@ namespace WordAnalyzer
             var result = new AnalysisResults();
             result.WordCount = wordCountDictionary.Values.DefaultIfEmpty(0).Sum();
             result.LongestWordLength = wordCountDictionary.Keys.Select(word => word.Length).DefaultIfEmpty(0).Max();
-            int maxRepeatCount = wordCountDictionary.Values.DefaultIfEmpty(0).Max();
-            result.MostCommonlyUsedWords = wordCountDictionary.Where(group => group.Value.Equals(maxRepeatCount)).Select(group => group.Key);
+            result.MostCommonlyUsedWords = GetMostCommonlyUsedWords(wordCountDictionary);
 
             return result;
+        }
+
+        private IEnumerable<string> GetMostCommonlyUsedWords(IReadOnlyDictionary<string, int> wordCountDictionary)
+        {
+            int maxRepeatCount = wordCountDictionary.Values.DefaultIfEmpty(0).Max();
+            return wordCountDictionary.Where(group => group.Value.Equals(maxRepeatCount)).Select(group => group.Key);
         }
     }
 }
